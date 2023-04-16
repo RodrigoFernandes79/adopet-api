@@ -25,4 +25,13 @@ public class Tutor {
 	private String email;
 	private String senha;
 
+
+	public Tutor(DadosEntradaTutor dadosEntradaTutor) {
+		this.nome = dadosEntradaTutor.nome();
+		this.email = dadosEntradaTutor.email();
+		this.senha = dadosEntradaTutor.senha();
+	}
+
+
+
 }
