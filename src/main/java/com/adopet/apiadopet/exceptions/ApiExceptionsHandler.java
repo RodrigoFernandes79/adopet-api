@@ -12,6 +12,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ApiExceptionsHandler {
 
+	@ExceptionHandler(ObjetoNaoEncontrado.class)
+	public ResponseEntity<String> tratarErroNaoEncontrado(ObjetoNaoEncontrado e) {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+
+	}
+
 	@ExceptionHandler(DadosExistenteException.class)
 	public ResponseEntity<String> tratarErroDadosExistente(DadosExistenteException ex) {
 

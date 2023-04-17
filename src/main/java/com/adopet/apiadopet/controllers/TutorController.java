@@ -1,8 +1,11 @@
 package com.adopet.apiadopet.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +35,14 @@ public class TutorController {
 		var Uri = uriComponentsBuilder
 				.path("/tutores/{id}").buildAndExpand(tutor.getId()).toUri();
 		return ResponseEntity.created(Uri).body(new DadosSaidaTutor(tutor));
+
+	}
+
+	@GetMapping
+	public ResponseEntity<List<DadosSaidaTutor>> retornarTutores() {
+		List<DadosSaidaTutor> tutores = tutorService.retornarTutores();
+
+		return ResponseEntity.ok().body(tutores);
 
 	}
 
