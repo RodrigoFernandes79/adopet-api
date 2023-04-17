@@ -46,4 +46,13 @@ public class TutorService {
 		return tutores;
 	}
 
+	public DadosSaidaTutor retornarTutorPorId(Long id) {
+		var tutorEntidade = tutorRepository.findById(id);
+		if(tutorEntidade.isEmpty()){
+			throw new ObjetoNaoEncontrado("Não encontrado");
+		}
+		var tutor = new DadosSaidaTutor(tutorEntidade.get());
+		return tutor;
+	}
+
 }
