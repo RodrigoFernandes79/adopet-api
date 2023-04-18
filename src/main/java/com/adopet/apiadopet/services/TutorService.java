@@ -37,7 +37,7 @@ public class TutorService {
 
 	public List<DadosSaidaTutor> retornarTutores() {
 		List<Tutor> tutoresEntidade = tutorRepository.findAll();
-		if(tutoresEntidade.isEmpty()) {
+		if (tutoresEntidade.isEmpty()) {
 			throw new ObjetoNaoEncontrado("Não encontrado");
 		}
 		List<DadosSaidaTutor> tutores = tutoresEntidade.stream()
@@ -48,11 +48,19 @@ public class TutorService {
 
 	public DadosSaidaTutor retornarTutorPorId(Long id) {
 		var tutorEntidade = tutorRepository.findById(id);
-		if(tutorEntidade.isEmpty()){
+		if (tutorEntidade.isEmpty()) {
 			throw new ObjetoNaoEncontrado("Não encontrado");
 		}
 		var tutor = new DadosSaidaTutor(tutorEntidade.get());
 		return tutor;
+	}
+
+	public void deletarTutorPorid(Long id) {
+		var tutorEntidade = tutorRepository.findById(id);
+		if (tutorEntidade.isEmpty()) {
+			throw new ObjetoNaoEncontrado("Tutor não existe no banco de dados");
+		}
+		tutorRepository.delete(tutorEntidade.get());
 	}
 
 }
