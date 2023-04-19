@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.adopet.apiadopet.domains.DadosAtualizacaoTutor;
 import com.adopet.apiadopet.domains.DadosEntradaTutor;
+import com.adopet.apiadopet.domains.DadosListagemTutor;
 import com.adopet.apiadopet.domains.DadosSaidaTutor;
 import com.adopet.apiadopet.services.TutorService;
 
@@ -44,8 +47,8 @@ public class TutorController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<DadosSaidaTutor>> retornarTutores() {
-		List<DadosSaidaTutor> tutores = tutorService.retornarTutores();
+	public ResponseEntity<List<DadosListagemTutor>> retornarTutores() {
+		List<DadosListagemTutor> tutores = tutorService.retornarTutores();
 
 		return ResponseEntity.ok().body(tutores);
 
@@ -59,6 +62,7 @@ public class TutorController {
 
 	}
 
+	@Transactional
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Map<String, String>> deletarTutorPorid(@PathVariable Long id) {
 		tutorService.deletarTutorPorid(id);
@@ -66,6 +70,16 @@ public class TutorController {
 		response.put("message", "Tutor deletado com sucesso.");
 
 		return ResponseEntity.status(HttpStatus.OK).body(response);
+
+	}
+
+	@Transactional
+	@PutMapping("/{id}")
+	public ResponseEntity<DadosSaidaTutor> alterarEmailPorId(@PathVariable Long id,
+			@Valid @RequestBody DadosAtualizacaoTutor dadosAtualizacaoTutor) {
+
+		DadosSaidaTutor tutorAlterado = tutorService.alterarEmailPorId(id, dadosAtualizacaoTutor);
+		return ResponseEntity.ok().body(tutorAlterado);
 
 	}
 }
