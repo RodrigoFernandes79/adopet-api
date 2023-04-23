@@ -1,9 +1,12 @@
 package com.adopet.apiadopet.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,6 +55,15 @@ public class AbrigoController {
 		var abrigo = abrigoService.listarAbrigoPorId(id);
 
 		return ResponseEntity.ok().body(abrigo);
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Map<String, String>> deletarAbrigoPorId(@PathVariable Long id) {
+		abrigoService.deletarAbrigoPorId(id);
+		Map<String, String> response = new HashMap<>();
+		response.put("message", "Abrigo deletado com Sucesso!");
+		return ResponseEntity.ok().body(response);
+
 	}
 
 }

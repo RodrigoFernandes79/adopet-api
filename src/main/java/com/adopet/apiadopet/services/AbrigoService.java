@@ -55,4 +55,13 @@ public class AbrigoService {
 		return abrigo;
 	}
 
+	public void deletarAbrigoPorId(Long id) {
+		var abrigoEntidade = abrigoRepository.findById(id);
+		if (abrigoEntidade.isEmpty()) {
+			throw new ObjetoNaoEncontrado(
+					"Não foi possível apagar o abrigo. não encontrado.");
+		}
+		abrigoRepository.delete(abrigoEntidade.get());
+	}
+
 }
