@@ -43,4 +43,25 @@ public class Tutor {
 		this.sobre = dadosEntradaTutor.sobre();
 	}
 
+public void dadosAbrigoAtualizado(DadosAtualizacaoTutor dadosAtualizacaoTutor) {
+	if (dadosAtualizacaoTutor.imagem() != null) {
+		this.imagem = dadosAtualizacaoTutor.imagem();
+	}
+	if (dadosAtualizacaoTutor.email() != null) {
+		this.email = dadosAtualizacaoTutor.email();
+	}
+	if (dadosAtualizacaoTutor.telefone() != null) {
+		this.telefone = dadosAtualizacaoTutor.telefone();
+	}
+	if (dadosAtualizacaoTutor.cidade() != null) {
+		this.cidade =dadosAtualizacaoTutor.cidade();
+	}
+	if (dadosAtualizacaoTutor.estado() != null) {
+		this.estado =dadosAtualizacaoTutor.estado();
+	}
+	if (dadosAtualizacaoTutor.sobre() != null) {
+		this.sobre = dadosAtualizacaoTutor.sobre();
+	}
+}
+
 }

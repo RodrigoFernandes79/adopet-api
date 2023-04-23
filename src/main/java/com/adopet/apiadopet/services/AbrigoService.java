@@ -7,12 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.adopet.apiadopet.domains.abrigo.Abrigo;
+import com.adopet.apiadopet.domains.abrigo.DadosAtualizacaoAbrigo;
 import com.adopet.apiadopet.domains.abrigo.DadosEntradaAbrigo;
 import com.adopet.apiadopet.domains.abrigo.DadosListagemAbrigo;
 import com.adopet.apiadopet.domains.abrigo.DadosSaidaAbrigo;
 import com.adopet.apiadopet.exceptions.DadosExistenteException;
 import com.adopet.apiadopet.exceptions.ObjetoNaoEncontrado;
 import com.adopet.apiadopet.repositories.AbrigoRepository;
+
+import jakarta.validation.Valid;
 
 @Service
 public class AbrigoService {
@@ -62,6 +65,20 @@ public class AbrigoService {
 					"Não foi possível apagar o abrigo. não encontrado.");
 		}
 		abrigoRepository.delete(abrigoEntidade.get());
+	}
+
+	public DadosSaidaAbrigo atualizarAbrigoPorId(@Valid DadosAtualizacaoAbrigo dadosAtualizacaoAbrigo, Long id) {
+		var abrigoEntidade = abrigoRepository.findById(id);
+		if(abrigoEntidade.isEmpty()) {
+			throw new ObjetoNaoEncontrado("Abrigo não encontrado.");
+		}
+		var email  = dadosAtualizacaoAbrigo.email();
+		var emailExistente = abrigoRepository.findByEmail(email);
+		if(emailExistente.isPresent()) {
+			throw new DadosExistenteException("Email já existe na Base de dados.");
+		}
+		abrigoEntidade.get().dadosAbrigoAtualizado(dadosAtualizacaoAbrigo);
+		return new DadosSaidaAbrigo(abrigoEntidade.get());
 	}
 
 }

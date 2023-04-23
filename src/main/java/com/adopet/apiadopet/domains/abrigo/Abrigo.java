@@ -54,4 +54,25 @@ public class Abrigo {
 
 	}
 
+	public void dadosAbrigoAtualizado(DadosAtualizacaoAbrigo dadosAtualizacao) {
+		if (dadosAtualizacao.imagem() != null) {
+			this.imagem = dadosAtualizacao.imagem();
+		}
+		if (dadosAtualizacao.email() != null) {
+			this.email = dadosAtualizacao.email();
+		}
+		if (dadosAtualizacao.telefone() != null) {
+			this.telefone = dadosAtualizacao.telefone();
+		}
+		if (dadosAtualizacao.cidade() != null) {
+			this.cidade = dadosAtualizacao.cidade();
+		}
+		if (dadosAtualizacao.estado() != null) {
+			this.estado = dadosAtualizacao.estado();
+		}
+		if (dadosAtualizacao.sobre() != null) {
+			this.sobre = dadosAtualizacao.sobre();
+		}
+	}
+
 }

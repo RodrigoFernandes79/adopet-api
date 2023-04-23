@@ -69,6 +69,8 @@ public class TutorService {
 
 	public DadosSaidaTutor alterarTutorPorId(Long id,
 			@Valid DadosAtualizacaoTutor dadosAtualizacaoTutor) {
+		var tutorEntidade = tutorRepository.findById(id)
+				.orElseThrow(() -> new ObjetoNaoEncontrado("Tutor não existe no banco de dados"));
 
 		var novoEmail = dadosAtualizacaoTutor.email();
 		Optional<Tutor> tutorExistente = tutorRepository.findByEmail(novoEmail);
@@ -76,31 +78,9 @@ public class TutorService {
 			throw new DadosExistenteException("Email já existe no banco de dados");
 		}
 
-		return tutorRepository.findById(id).map(obj -> {
-			obj.getId();
-			if (dadosAtualizacaoTutor.imagem() != null) {
-				obj.setImagem(dadosAtualizacaoTutor.imagem());
-			}
-			if (novoEmail != null) {
-				obj.setEmail(novoEmail);
-			}
-			if (dadosAtualizacaoTutor.telefone() != null) {
-				obj.setTelefone(dadosAtualizacaoTutor.telefone());
-			}
-			if (dadosAtualizacaoTutor.cidade() != null) {
-				obj.setCidade(dadosAtualizacaoTutor.cidade());
-			}
-			if (dadosAtualizacaoTutor.estado() != null) {
-				obj.setEstado(dadosAtualizacaoTutor.estado());
-			}
-			if (dadosAtualizacaoTutor.sobre() != null) {
-				obj.setSobre(dadosAtualizacaoTutor.sobre());
-			}
-			tutorRepository.save(obj);
+		tutorEntidade.dadosAbrigoAtualizado(dadosAtualizacaoTutor);
 
-			var tutorSaida = new DadosSaidaTutor(obj);
-			return tutorSaida;
-		}).orElseThrow(() -> new ObjetoNaoEncontrado("Tutor não existe no banco de dados"));
+		return new DadosSaidaTutor(tutorEntidade);
 
 	}
 
