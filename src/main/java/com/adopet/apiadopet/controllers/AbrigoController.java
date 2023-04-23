@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +43,13 @@ public class AbrigoController {
 	@GetMapping
 	public ResponseEntity<List<DadosListagemAbrigo>> listarAbrigo() {
 		var abrigo = abrigoService.listarAbrigo();
+
+		return ResponseEntity.ok().body(abrigo);
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<DadosSaidaAbrigo> listarAbrigoPorId(@PathVariable Long id) {
+		var abrigo = abrigoService.listarAbrigoPorId(id);
 
 		return ResponseEntity.ok().body(abrigo);
 	}
