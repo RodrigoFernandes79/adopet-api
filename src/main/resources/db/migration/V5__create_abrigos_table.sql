@@ -1,0 +1,9 @@
+CREATE TABLE abrigos (
+  id BIGSERIAL PRIMARY KEY,
+  nome VARCHAR(50) NOT NULL,
+  imagem VARCHAR(255),
+  cnpj VARCHAR(18) NOT NULL,
+  cidade VARCHAR(20) NOT NULL,
+  estado VARCHAR(20)NOT NULL,
+  sobre TEXT
+);

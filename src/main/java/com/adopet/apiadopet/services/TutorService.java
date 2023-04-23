@@ -7,11 +7,11 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.adopet.apiadopet.domains.DadosAtualizacaoTutor;
-import com.adopet.apiadopet.domains.DadosEntradaTutor;
-import com.adopet.apiadopet.domains.DadosListagemTutor;
-import com.adopet.apiadopet.domains.DadosSaidaTutor;
-import com.adopet.apiadopet.domains.Tutor;
+import com.adopet.apiadopet.domains.tutor.DadosAtualizacaoTutor;
+import com.adopet.apiadopet.domains.tutor.DadosEntradaTutor;
+import com.adopet.apiadopet.domains.tutor.DadosListagemTutor;
+import com.adopet.apiadopet.domains.tutor.DadosSaidaTutor;
+import com.adopet.apiadopet.domains.tutor.Tutor;
 import com.adopet.apiadopet.exceptions.DadosExistenteException;
 import com.adopet.apiadopet.exceptions.ObjetoNaoEncontrado;
 import com.adopet.apiadopet.repositories.TutorRepository;

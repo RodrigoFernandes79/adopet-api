@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.adopet.apiadopet.domains.DadosAtualizacaoTutor;
-import com.adopet.apiadopet.domains.DadosEntradaTutor;
-import com.adopet.apiadopet.domains.DadosListagemTutor;
-import com.adopet.apiadopet.domains.DadosSaidaTutor;
+import com.adopet.apiadopet.domains.tutor.DadosAtualizacaoTutor;
+import com.adopet.apiadopet.domains.tutor.DadosEntradaTutor;
+import com.adopet.apiadopet.domains.tutor.DadosListagemTutor;
+import com.adopet.apiadopet.domains.tutor.DadosSaidaTutor;
 import com.adopet.apiadopet.services.TutorService;
 
 import jakarta.validation.Valid;

@@ -1,4 +1,4 @@
-package com.adopet.apiadopet.domains;
+package com.adopet.apiadopet.domains.tutor;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

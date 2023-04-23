@@ -1,4 +1,4 @@
-package com.adopet.apiadopet.domains;
+package com.adopet.apiadopet.domains.tutor;
 
 public record DadosListagemTutor(Long id, String nome, String imagem,
 		String email, String telefone, String cidade, String estado, String sobre) {
