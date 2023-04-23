@@ -1,5 +1,6 @@
 package com.adopet.apiadopet.domains;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,13 +25,22 @@ public class Tutor {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
+	private String imagem;
 	private String email;
-	private String senha;
+	private String telefone;
+	private String cidade;
+	private String estado;
+	@Column(columnDefinition = "TEXT")
+	private String sobre;
 
 	public Tutor(DadosEntradaTutor dadosEntradaTutor) {
 		this.nome = dadosEntradaTutor.nome();
+		this.imagem = dadosEntradaTutor.imagem();
 		this.email = dadosEntradaTutor.email();
-		this.senha = dadosEntradaTutor.senha();
+		this.telefone = dadosEntradaTutor.telefone();
+		this.cidade = dadosEntradaTutor.cidade();
+		this.estado = dadosEntradaTutor.estado();
+		this.sobre = dadosEntradaTutor.sobre();
 	}
 
 }

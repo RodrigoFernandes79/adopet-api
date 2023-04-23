@@ -10,9 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -74,11 +74,11 @@ public class TutorController {
 	}
 
 	@Transactional
-	@PutMapping("/{id}")
-	public ResponseEntity<DadosSaidaTutor> alterarEmailPorId(@PathVariable Long id,
+	@PatchMapping("/{id}")
+	public ResponseEntity<DadosSaidaTutor> alterarTutorPorId(@PathVariable Long id,
 			@Valid @RequestBody DadosAtualizacaoTutor dadosAtualizacaoTutor) {
 
-		DadosSaidaTutor tutorAlterado = tutorService.alterarEmailPorId(id, dadosAtualizacaoTutor);
+		DadosSaidaTutor tutorAlterado = tutorService.alterarTutorPorId(id, dadosAtualizacaoTutor);
 		return ResponseEntity.ok().body(tutorAlterado);
 
 	}

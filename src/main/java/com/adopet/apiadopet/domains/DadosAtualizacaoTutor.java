@@ -1,12 +1,18 @@
 package com.adopet.apiadopet.domains;
 
+import org.hibernate.validator.constraints.URL;
+
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 
 public record DadosAtualizacaoTutor(
 
-		@NotBlank(message = "{email.obrigatorio}")
-	  @Email(message = "{email.invalido}")
-	  String email) {
+		@Email(message = "{email.invalido}")
+		String email,
+		@URL(message = "{imagem.valida}")
+		String imagem,
+		String telefone,
+		String cidade,
+		String estado,
+		String sobre) {
 
 }
