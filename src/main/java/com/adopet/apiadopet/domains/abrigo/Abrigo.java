@@ -3,11 +3,14 @@ package com.adopet.apiadopet.domains.abrigo;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.adopet.apiadopet.domains.endereco.Endereco;
 import com.adopet.apiadopet.domains.pet.Pet;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -34,12 +37,13 @@ public class Abrigo {
 	private String cnpj;
 	private String telefone;
 	private String email;
-	private String cidade;
-	private String estado;
 	@Column(columnDefinition = "TEXT")
 	private String sobre;
 
-	@OneToMany(mappedBy = "abrigo", cascade = CascadeType.ALL)
+	@Embedded
+	private Endereco endereco;
+
+	@OneToMany(mappedBy = "abrigo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Pet> pets = new ArrayList<>();
 
 	public Abrigo(DadosEntradaAbrigo dadosEntradaAbrigo) {
@@ -48,8 +52,7 @@ public class Abrigo {
 		this.cnpj = dadosEntradaAbrigo.cnpj();
 		this.telefone = dadosEntradaAbrigo.telefone();
 		this.email = dadosEntradaAbrigo.email();
-		this.cidade = dadosEntradaAbrigo.cidade();
-		this.estado = dadosEntradaAbrigo.estado();
+		this.endereco = new Endereco(dadosEntradaAbrigo.endereco());
 		this.sobre = dadosEntradaAbrigo.sobre();
 
 	}
@@ -64,12 +67,10 @@ public class Abrigo {
 		if (dadosAtualizacao.telefone() != null) {
 			this.telefone = dadosAtualizacao.telefone();
 		}
-		if (dadosAtualizacao.cidade() != null) {
-			this.cidade = dadosAtualizacao.cidade();
+		if (dadosAtualizacao.endereco() != null) {
+			this.endereco.dadosEnderecoAtualizado(dadosAtualizacao.endereco());
 		}
-		if (dadosAtualizacao.estado() != null) {
-			this.estado = dadosAtualizacao.estado();
-		}
+
 		if (dadosAtualizacao.sobre() != null) {
 			this.sobre = dadosAtualizacao.sobre();
 		}

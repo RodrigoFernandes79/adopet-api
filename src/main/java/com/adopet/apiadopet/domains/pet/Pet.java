@@ -17,10 +17,12 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity(name = "Pet")
 @Table(name = "pets")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -42,8 +44,20 @@ public class Pet {
 
 	private Boolean adotado;
 
+
 	@ManyToOne
 	@JoinColumn(name = "abrigo_id")
 	private Abrigo abrigo;
+
+	public Pet(DadosEntradaPet dadosEntradaPet) {
+		this.nome = dadosEntradaPet.nome();
+		this.idade = dadosEntradaPet.idade();
+		this.imagem = dadosEntradaPet.imagem();
+		this.categoria = dadosEntradaPet.categoria();
+		this.personalidade = dadosEntradaPet.personalidade();
+		this.tamanho = dadosEntradaPet.tamanho();
+		this.adotado = false;
+
+	}
 
 }
