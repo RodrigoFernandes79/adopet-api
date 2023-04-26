@@ -1,9 +1,13 @@
 package com.adopet.apiadopet.services;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.adopet.apiadopet.domains.pet.DadosEntradaPet;
+import com.adopet.apiadopet.domains.pet.DadosListagemPet;
 import com.adopet.apiadopet.domains.pet.Pet;
 import com.adopet.apiadopet.exceptions.ObjetoNaoEncontrado;
 import com.adopet.apiadopet.repositories.AbrigoRepository;
@@ -28,5 +32,15 @@ public class PetService {
 		pet.setAbrigo(abrigo.get());
 		petRepository.save(pet);
 		return pet;
-}
+	}
+
+	public List<DadosListagemPet> listarPets() {
+		var petEntidade = petRepository.findAll();
+		if (petEntidade.isEmpty()) {
+			throw new ObjetoNaoEncontrado("Não encontrado.");
+		}
+		List<DadosListagemPet> pets = petEntidade.stream().map(DadosListagemPet::new)
+				.collect(Collectors.toList());
+		return pets;
+	}
 }
