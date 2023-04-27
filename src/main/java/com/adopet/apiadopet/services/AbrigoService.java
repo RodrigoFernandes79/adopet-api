@@ -44,8 +44,8 @@ public class AbrigoService {
 		if (abrigoEntidade.isEmpty()) {
 			throw new ObjetoNaoEncontrado("Não Encontrado");
 		}
-		List<DadosListagemAbrigo> abrigo = abrigoEntidade.stream()
-				.map(DadosListagemAbrigo::new).collect(Collectors.toList());
+		List<DadosListagemAbrigo> abrigo = abrigoEntidade.stream().map(DadosListagemAbrigo::new)
+		.collect(Collectors.toList());
 		return abrigo;
 	}
 
@@ -69,12 +69,12 @@ public class AbrigoService {
 
 	public DadosSaidaAbrigo atualizarAbrigoPorId(@Valid DadosAtualizacaoAbrigo dadosAtualizacaoAbrigo, Long id) {
 		var abrigoEntidade = abrigoRepository.findById(id);
-		if(abrigoEntidade.isEmpty()) {
+		if (abrigoEntidade.isEmpty()) {
 			throw new ObjetoNaoEncontrado("Abrigo não encontrado.");
 		}
-		var email  = dadosAtualizacaoAbrigo.email();
+		var email = dadosAtualizacaoAbrigo.email();
 		var emailExistente = abrigoRepository.findByEmail(email);
-		if(emailExistente.isPresent()) {
+		if (emailExistente.isPresent()) {
 			throw new DadosExistenteException("Email já existe na Base de dados.");
 		}
 		abrigoEntidade.get().dadosAbrigoAtualizado(dadosAtualizacaoAbrigo);

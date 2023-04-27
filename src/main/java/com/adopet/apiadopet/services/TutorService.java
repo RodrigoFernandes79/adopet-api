@@ -44,8 +44,7 @@ public class TutorService {
 		if (tutoresEntidade.isEmpty()) {
 			throw new ObjetoNaoEncontrado("Não encontrado");
 		}
-		List<DadosListagemTutor> tutores = tutoresEntidade.stream()
-				.map(DadosListagemTutor::new)
+		List<DadosListagemTutor> tutores = tutoresEntidade.stream().map(DadosListagemTutor::new)
 				.collect(Collectors.toList());
 		return tutores;
 	}

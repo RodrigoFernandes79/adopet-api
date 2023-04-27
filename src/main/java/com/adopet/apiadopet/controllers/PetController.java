@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +45,14 @@ public class PetController {
 		List<DadosListagemPet> listaPets = petService.listarPets();
 
 		return ResponseEntity.ok().body(listaPets);
+
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<DadosSaidaPet> listarPetPorId(@PathVariable Long id) {
+		var pet = petService.listarPetPorId(id);
+
+		return ResponseEntity.ok().body(pet);
 
 	}
 
