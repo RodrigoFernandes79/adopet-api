@@ -53,4 +53,12 @@ public class PetService {
 		var pet = new DadosSaidaPet(petEntidade.get());
 		return pet;
 	}
+
+	public void deletarPetPorId(Long id) {
+		var pet = petRepository.findById(id);
+		if (pet.isEmpty()) {
+			throw new ObjetoNaoEncontrado("Não foi possível deletar.Pet não encontrado");
+		}
+		petRepository.delete(pet.get());
+	}
 }

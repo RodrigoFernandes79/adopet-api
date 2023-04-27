@@ -1,9 +1,12 @@
 package com.adopet.apiadopet.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,4 +59,15 @@ public class PetController {
 
 	}
 
+	@Transactional
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Map<String, String>> deletarPetPorId(@PathVariable Long id) {
+		petService.deletarPetPorId(id);
+
+		Map<String, String> response = new HashMap<>();
+		response.put("memsagem", "Pet deletado com sucesso");
+
+		return ResponseEntity.ok().body(response);
+
+	}
 }
