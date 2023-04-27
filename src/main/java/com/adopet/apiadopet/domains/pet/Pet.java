@@ -44,7 +44,6 @@ public class Pet {
 
 	private Boolean adotado;
 
-
 	@ManyToOne
 	@JoinColumn(name = "abrigo_id")
 	private Abrigo abrigo;
@@ -58,6 +57,18 @@ public class Pet {
 		this.tamanho = dadosEntradaPet.tamanho();
 		this.adotado = false;
 
+	}
+
+	public void atualizarCadastroPet(DadosAtualizacaoPet dadosAtualizacaoPet) {
+		if (dadosAtualizacaoPet.idade() != null) {
+			this.idade = dadosAtualizacaoPet.idade();
+		}
+		if (dadosAtualizacaoPet.imagem() != null) {
+			this.imagem = dadosAtualizacaoPet.imagem();
+		}
+		if (dadosAtualizacaoPet.adotado() != null) {
+			this.adotado = dadosAtualizacaoPet.adotado();
+		}
 	}
 
 }

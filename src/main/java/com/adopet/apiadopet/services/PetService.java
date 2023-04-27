@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.adopet.apiadopet.domains.pet.DadosAtualizacaoPet;
 import com.adopet.apiadopet.domains.pet.DadosEntradaPet;
 import com.adopet.apiadopet.domains.pet.DadosListagemPet;
 import com.adopet.apiadopet.domains.pet.DadosSaidaPet;
@@ -60,5 +61,15 @@ public class PetService {
 			throw new ObjetoNaoEncontrado("Não foi possível deletar.Pet não encontrado");
 		}
 		petRepository.delete(pet.get());
+	}
+
+	public DadosSaidaPet atualizarPetPorId(Long id, DadosAtualizacaoPet dadosAtualizacaoPet) {
+		var petEntidade = petRepository.findById(id);
+		if (petEntidade.isEmpty()) {
+			throw new ObjetoNaoEncontrado("Pet não encontrado.");
+		}
+
+		petEntidade.get().atualizarCadastroPet(dadosAtualizacaoPet);
+		return new DadosSaidaPet(petEntidade.get());
 	}
 }

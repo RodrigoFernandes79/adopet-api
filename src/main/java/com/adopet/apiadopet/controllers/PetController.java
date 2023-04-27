@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.adopet.apiadopet.domains.pet.DadosAtualizacaoPet;
 import com.adopet.apiadopet.domains.pet.DadosEntradaPet;
 import com.adopet.apiadopet.domains.pet.DadosListagemPet;
 import com.adopet.apiadopet.domains.pet.DadosSaidaPet;
@@ -68,6 +70,15 @@ public class PetController {
 		response.put("memsagem", "Pet deletado com sucesso");
 
 		return ResponseEntity.ok().body(response);
+
+	}
+
+	@Transactional
+	@PatchMapping("/{id}")
+	public ResponseEntity<DadosSaidaPet> atualizarPetPorId(@PathVariable Long id,
+			@Valid @RequestBody DadosAtualizacaoPet dadosAtualizacaoPet) {
+		var petAtualizado = petService.atualizarPetPorId(id, dadosAtualizacaoPet);
+		return ResponseEntity.ok().body(petAtualizado);
 
 	}
 }
