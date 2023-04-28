@@ -37,13 +37,14 @@ public class PetService {
 	}
 
 	public List<DadosListagemPet> listarPets() {
-		var petEntidade = petRepository.findAll();
+		var petEntidade = petRepository.findAllByAdotadoFalse();
 		if (petEntidade.isEmpty()) {
 			throw new ObjetoNaoEncontrado("Não encontrado.");
 		}
 		List<DadosListagemPet> pets = petEntidade.stream().map(DadosListagemPet::new)
 				.collect(Collectors.toList());
 		return pets;
+
 	}
 
 	public DadosSaidaPet listarPetPorId(Long id) {

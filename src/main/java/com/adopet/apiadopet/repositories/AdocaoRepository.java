@@ -1,14 +1,13 @@
 package com.adopet.apiadopet.repositories;
 
-import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.adopet.apiadopet.domains.pet.Pet;
+import com.adopet.apiadopet.domains.adocao.Adocao;
 
 @Repository
-public interface PetRepository extends JpaRepository<Pet, Long> {
+public interface AdocaoRepository extends JpaRepository<Adocao, UUID>{
 
-	List<Pet> findAllByAdotadoFalse();
 }
