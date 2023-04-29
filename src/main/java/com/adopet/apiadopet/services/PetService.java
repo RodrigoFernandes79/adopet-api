@@ -58,8 +58,8 @@ public class PetService {
 
 	public void deletarPetPorId(Long id) {
 		var pet = petRepository.findById(id);
-		if (pet.isEmpty()) {
-			throw new ObjetoNaoEncontrado("Não foi possível deletar.Pet não encontrado");
+		if (pet.isEmpty() || pet.get().getAdotado() == true) {
+			throw new ObjetoNaoEncontrado("Não foi possível deletar.Pet não encontrado ou já foi adotado.");
 		}
 		petRepository.delete(pet.get());
 	}

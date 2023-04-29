@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.adopet.apiadopet.domains.adocao.Adocao;
 
 @Repository
-public interface AdocaoRepository extends JpaRepository<Adocao, UUID>{
+public interface AdocaoRepository extends JpaRepository<Adocao, UUID> {
+
+	Adocao findByPetId(Long id_pet);
 
 }

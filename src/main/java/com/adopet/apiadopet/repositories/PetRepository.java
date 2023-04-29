@@ -11,4 +11,5 @@ import com.adopet.apiadopet.domains.pet.Pet;
 public interface PetRepository extends JpaRepository<Pet, Long> {
 
 	List<Pet> findAllByAdotadoFalse();
+
 }

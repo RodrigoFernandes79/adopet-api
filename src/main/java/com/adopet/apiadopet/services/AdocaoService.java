@@ -47,4 +47,18 @@ public class AdocaoService {
 		return new DadosSaidaAdocao(adocaoEntidade);
 	}
 
+	public void deletarAdocaoPorPetId(Long id_pet) {
+		var petEntidade = petRepository.findById(id_pet);
+		if (petEntidade.isEmpty() || petEntidade.get().getAdotado() == false) {
+			throw new ObjetoNaoEncontrado(
+					"Adoção não pode ser concluida.Pet não foi adotado ou não existe no Banco de dados");
+		}
+		var adocaoEntidade = adocaoRepository.findByPetId(petEntidade.get().getId());
+		// if (adocaoEntidade == null) {
+		// 	throw new ObjetoNaoEncontrado("Adoção já foi deletada.");
+		// }
+		petEntidade.get().setAdotado(false);
+		adocaoRepository.delete(adocaoEntidade);
+	}
+
 }
