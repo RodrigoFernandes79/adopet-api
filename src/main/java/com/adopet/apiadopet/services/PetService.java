@@ -1,9 +1,8 @@
 package com.adopet.apiadopet.services;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.adopet.apiadopet.domains.pet.DadosAtualizacaoPet;
@@ -36,13 +35,12 @@ public class PetService {
 		return pet;
 	}
 
-	public List<DadosListagemPet> listarPets() {
-		var petEntidade = petRepository.findAllByAdotadoFalse();
+	public Page<DadosListagemPet> listarPets(Pageable pageable) {
+		var petEntidade = petRepository.findAllByAdotadoFalse(pageable);
 		if (petEntidade.isEmpty()) {
 			throw new ObjetoNaoEncontrado("Não encontrado.");
 		}
-		List<DadosListagemPet> pets = petEntidade.stream().map(DadosListagemPet::new)
-				.collect(Collectors.toList());
+		Page<DadosListagemPet> pets = petEntidade.map(DadosListagemPet::new);
 		return pets;
 
 	}

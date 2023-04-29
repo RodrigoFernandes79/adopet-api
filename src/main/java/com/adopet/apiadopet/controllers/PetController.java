@@ -1,10 +1,12 @@
 package com.adopet.apiadopet.controllers;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,8 +48,9 @@ public class PetController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<DadosListagemPet>> listarPets() {
-		List<DadosListagemPet> listaPets = petService.listarPets();
+	public ResponseEntity<Page<DadosListagemPet>> listarPets(
+			@PageableDefault(size = 10, sort = { "nome" }) Pageable pageable) {
+		Page<DadosListagemPet> listaPets = petService.listarPets(pageable);
 
 		return ResponseEntity.ok().body(listaPets);
 

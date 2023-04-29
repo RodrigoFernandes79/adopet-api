@@ -1,10 +1,10 @@
 package com.adopet.apiadopet.services;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.adopet.apiadopet.domains.tutor.DadosAtualizacaoTutor;
@@ -17,6 +17,7 @@ import com.adopet.apiadopet.exceptions.ObjetoNaoEncontrado;
 import com.adopet.apiadopet.repositories.TutorRepository;
 
 import jakarta.validation.Valid;
+import lombok.var;
 
 @Service
 public class TutorService {
@@ -39,13 +40,14 @@ public class TutorService {
 		return tutor;
 	}
 
-	public List<DadosListagemTutor> retornarTutores() {
-		List<Tutor> tutoresEntidade = tutorRepository.findAll();
+	public Page<DadosListagemTutor> retornarTutores(Pageable paginacao) {
+		Page<Tutor> tutoresEntidade = tutorRepository.findAll(paginacao);
 		if (tutoresEntidade.isEmpty()) {
 			throw new ObjetoNaoEncontrado("Não encontrado");
 		}
-		List<DadosListagemTutor> tutores = tutoresEntidade.stream().map(DadosListagemTutor::new)
-				.collect(Collectors.toList());
+		Page<DadosListagemTutor> tutores = tutoresEntidade
+				.map(DadosListagemTutor::new);
+
 		return tutores;
 	}
 

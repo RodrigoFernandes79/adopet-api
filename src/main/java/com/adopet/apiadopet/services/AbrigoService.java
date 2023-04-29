@@ -1,9 +1,8 @@
 package com.adopet.apiadopet.services;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.adopet.apiadopet.domains.abrigo.Abrigo;
@@ -39,13 +38,13 @@ public class AbrigoService {
 		return abrigo;
 	}
 
-	public List<DadosListagemAbrigo> listarAbrigo() {
-		List<Abrigo> abrigoEntidade = abrigoRepository.findAll();
+	public Page<DadosListagemAbrigo> listarAbrigo(Pageable pageable) {
+		Page<Abrigo> abrigoEntidade = abrigoRepository.findAll(pageable);
 		if (abrigoEntidade.isEmpty()) {
 			throw new ObjetoNaoEncontrado("Não Encontrado");
 		}
-		List<DadosListagemAbrigo> abrigo = abrigoEntidade.stream().map(DadosListagemAbrigo::new)
-		.collect(Collectors.toList());
+		Page<DadosListagemAbrigo> abrigo = abrigoEntidade.map(DadosListagemAbrigo::new);
+
 		return abrigo;
 	}
 

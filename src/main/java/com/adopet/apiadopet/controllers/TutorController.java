@@ -1,10 +1,12 @@
 package com.adopet.apiadopet.controllers;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,8 +49,9 @@ public class TutorController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<DadosListagemTutor>> retornarTutores() {
-		List<DadosListagemTutor> tutores = tutorService.retornarTutores();
+	public ResponseEntity<Page<DadosListagemTutor>> retornarTutores(
+			@PageableDefault(size = 10, sort = { "nome" }) Pageable paginacao) {
+		Page<DadosListagemTutor> tutores = tutorService.retornarTutores(paginacao);
 
 		return ResponseEntity.ok().body(tutores);
 
