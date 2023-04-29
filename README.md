@@ -23,8 +23,26 @@ Projeto em Java realizado através da Alura no Challenge Backend 6ª Edição. A
 ## 💡Funcionalidades:
 
 ### 👤Tutor
-- `Cadastrar: Salvar Tutor através de um POST /tutores com as informações em um JSON no corpo da requisição.`
-- `Atualizar: Atualizar Tutor através de um PUT /tutores/{ID}, onde ID é o identificador do Tutor, os novos dados do Tutor devem ser enviados no corpo da requisição.`
-- `Buscar por id: Busca Tutor por ID através de um GET /tutores/{ID}, onde {ID} é o identificador do Tutor.`
-- `Buscar todos: Busca de Tutores através de um GET /tutores.`
-- `Deletar: Deletar Tutor através de um DELETE /tutores/{ID}, onde {ID} é o identificador do Tutor.`
+
+- `Cadastrar`: Salvar Tutor através de um POST /tutores com as informações em um JSON no corpo da requisição.
+
+- `Atualizar`: Atualizar Tutor através de um PUT /tutores/{ID}, onde ID é o identificador do Tutor, os novos dados do Tutor devem ser enviados no corpo da requisição.
+
+- `Buscar por id`: Busca Tutor por ID através de um GET /tutores/{ID}, onde {ID} é o identificador do Tutor.
+
+- `Buscar todos`: Busca de Tutores através de um GET /tutores.
+
+- `Deletar`: Deletar Tutor através de um DELETE /tutores/{ID}, onde {ID} é o identificador do Tutor.
+
+### 🏠Abrigo
+
+- `Cadastrar`: Salvar Abrigo através de um POST /abrigos com as informações em um JSON no corpo da requisição.
+
+- `Buscar todos`: Busca paginada de abrigos através de um GET /abrigos.
+
+- `Buscar por id`: Busca Abrigo por ID através de um GET /abrigos/{ID}, onde {ID} é o identificador do Abrigo.
+
+- `Atualizar`: Atualizar Abrigo através de um PUT /abrigos/{ID}, onde ID é o identificador do Abrigo, os novos dados do abrigo devem ser enviados no corpo da requisição.
+
+- `Deletar`: Deletar Abrigo através de um DELETE /abrigos/{ID}, onde {ID} é o identificador do Abrigo.
+
