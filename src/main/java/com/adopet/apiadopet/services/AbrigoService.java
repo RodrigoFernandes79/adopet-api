@@ -3,6 +3,7 @@ package com.adopet.apiadopet.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.adopet.apiadopet.domains.abrigo.Abrigo;
@@ -12,7 +13,10 @@ import com.adopet.apiadopet.domains.abrigo.DadosListagemAbrigo;
 import com.adopet.apiadopet.domains.abrigo.DadosSaidaAbrigo;
 import com.adopet.apiadopet.exceptions.DadosExistenteException;
 import com.adopet.apiadopet.exceptions.ObjetoNaoEncontrado;
+import com.adopet.apiadopet.exceptions.SenhaNaoIgualException;
 import com.adopet.apiadopet.repositories.AbrigoRepository;
+import com.adopet.apiadopet.security.Usuario;
+import com.adopet.apiadopet.security.UsuarioRepository;
 
 import jakarta.validation.Valid;
 
@@ -21,6 +25,10 @@ public class AbrigoService {
 
 	@Autowired
 	private AbrigoRepository abrigoRepository;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 
 	public Abrigo cadastrarAbrigo(DadosEntradaAbrigo dadosEntradaAbrigo) {
 		var cnpjAbrigo = dadosEntradaAbrigo.cnpj();
@@ -33,8 +41,18 @@ public class AbrigoService {
 		if (emailExistente.isPresent()) {
 			throw new DadosExistenteException("EMAIL já existe no BD.");
 		}
+		if (!dadosEntradaAbrigo.senha().equals(dadosEntradaAbrigo.senhaRepetida())) {
+			throw new SenhaNaoIgualException("Senhas devem ser iguais.");
+		}
 		var abrigo = new Abrigo(dadosEntradaAbrigo);
+		var gerarSenhaBcryprografada = passwordEncoder.encode(abrigo.getSenha());
+		abrigo.setSenha(gerarSenhaBcryprografada);
 		abrigoRepository.save(abrigo);
+
+		var usuario = new Usuario(dadosEntradaAbrigo);
+		var gerarSenhaBcryprografadaUsuario = passwordEncoder.encode(usuario.getSenha());
+		usuario.setSenha(gerarSenhaBcryprografadaUsuario);
+		usuarioRepository.save(usuario);
 		return abrigo;
 	}
 
@@ -70,11 +88,6 @@ public class AbrigoService {
 		var abrigoEntidade = abrigoRepository.findById(id);
 		if (abrigoEntidade.isEmpty()) {
 			throw new ObjetoNaoEncontrado("Abrigo não encontrado.");
-		}
-		var email = dadosAtualizacaoAbrigo.email();
-		var emailExistente = abrigoRepository.findByEmail(email);
-		if (emailExistente.isPresent()) {
-			throw new DadosExistenteException("Email já existe na Base de dados.");
 		}
 		abrigoEntidade.get().dadosAbrigoAtualizado(dadosAtualizacaoAbrigo);
 		return new DadosSaidaAbrigo(abrigoEntidade.get());

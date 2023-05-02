@@ -54,9 +54,9 @@ public class AdocaoService {
 					"Adoção não pode ser concluida.Pet não foi adotado ou não existe no Banco de dados");
 		}
 		var adocaoEntidade = adocaoRepository.findByPetId(petEntidade.get().getId());
-		// if (adocaoEntidade == null) {
-		// 	throw new ObjetoNaoEncontrado("Adoção já foi deletada.");
-		// }
+		if (adocaoEntidade == null) {
+			throw new ObjetoNaoEncontrado("Adoção já foi deletada.");
+		}
 		petEntidade.get().setAdotado(false);
 		adocaoRepository.delete(adocaoEntidade);
 	}

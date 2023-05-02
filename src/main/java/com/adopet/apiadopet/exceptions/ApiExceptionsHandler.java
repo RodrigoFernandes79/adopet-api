@@ -25,6 +25,13 @@ public class ApiExceptionsHandler {
 
 	}
 
+	@ExceptionHandler(SenhaNaoIgualException.class)
+	public ResponseEntity<String> tratarErroSenhasDiferente(SenhaNaoIgualException ex) {
+
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+
+	}
+
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<List<DadosCampoValidacao>> tratarErroValidacao(MethodArgumentNotValidException e) {
 		var errors = e.getFieldErrors();

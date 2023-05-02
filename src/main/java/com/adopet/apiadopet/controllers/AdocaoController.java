@@ -20,7 +20,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("adocao")
+@RequestMapping("/adocao")
 public class AdocaoController {
 
 	@Autowired

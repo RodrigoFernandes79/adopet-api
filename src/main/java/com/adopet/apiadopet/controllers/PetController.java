@@ -28,7 +28,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("pets")
+@RequestMapping("/pets")
 public class PetController {
 
 	@Autowired

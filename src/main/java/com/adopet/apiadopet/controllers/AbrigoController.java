@@ -28,7 +28,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("abrigos")
+@RequestMapping("/abrigos")
 public class AbrigoController {
 
 	@Autowired

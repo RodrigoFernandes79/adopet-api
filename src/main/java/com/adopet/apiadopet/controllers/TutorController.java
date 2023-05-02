@@ -23,13 +23,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.adopet.apiadopet.domains.tutor.DadosAtualizacaoTutor;
 import com.adopet.apiadopet.domains.tutor.DadosEntradaTutor;
 import com.adopet.apiadopet.domains.tutor.DadosListagemTutor;
+import com.adopet.apiadopet.domains.tutor.DadosSaidaCadastroTutor;
 import com.adopet.apiadopet.domains.tutor.DadosSaidaTutor;
 import com.adopet.apiadopet.services.TutorService;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("tutores")
+@RequestMapping("/tutores")
 public class TutorController {
 
 	@Autowired
@@ -44,6 +45,7 @@ public class TutorController {
 		var tutor = tutorService.cadastrarTutor(dadosEntradaTutor);
 		var Uri = uriComponentsBuilder
 				.path("/tutores/{id}").buildAndExpand(tutor.getId()).toUri();
+
 		return ResponseEntity.created(Uri).body(new DadosSaidaTutor(tutor));
 
 	}
@@ -58,7 +60,7 @@ public class TutorController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<DadosSaidaTutor> retornarTutorPorId(@PathVariable Long id) {
+	public ResponseEntity<DadosSaidaCadastroTutor> retornarTutorPorId(@PathVariable Long id) {
 		var tutor = tutorService.retornarTutorPorId(id);
 
 		return ResponseEntity.ok().body(tutor);
@@ -78,11 +80,27 @@ public class TutorController {
 
 	@Transactional
 	@PatchMapping("/{id}")
-	public ResponseEntity<DadosSaidaTutor> alterarTutorPorId(@PathVariable Long id,
+	public ResponseEntity<DadosSaidaCadastroTutor> alterarTutorPorId(@PathVariable Long id,
 			@Valid @RequestBody DadosAtualizacaoTutor dadosAtualizacaoTutor) {
 
-		DadosSaidaTutor tutorAlterado = tutorService.alterarTutorPorId(id, dadosAtualizacaoTutor);
+		DadosSaidaCadastroTutor tutorAlterado = tutorService.alterarTutorPorId(id, dadosAtualizacaoTutor);
 		return ResponseEntity.ok().body(tutorAlterado);
 
 	}
+	// @Transactional
+	// @PostMapping("/cadastro")
+	// public ResponseEntity<DadosSaidaUsuario> cadastrarUsuario(
+	// @RequestBody @Valid DadosCadastroUsuario dadosUsuario,
+	// UriComponentsBuilder uriComponentsBuilder) {
+
+	// var usuario = tutorService.cadastrarUsuario(dadosUsuario);
+
+	// var uri = uriComponentsBuilder
+	// .path("/login/cadastro/{id}").buildAndExpand(usuario.getId())
+	// .toUri();
+
+	// return ResponseEntity.created(uri).body(new
+	// DadosSaidaUsuario(dadosUsuario.nome(), usuario.getEmail()));
+	// }
+
 }

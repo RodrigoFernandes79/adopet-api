@@ -20,10 +20,12 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity(name = "Abrigo")
 @Table(name = "abrigos")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -37,6 +39,7 @@ public class Abrigo {
 	private String cnpj;
 	private String telefone;
 	private String email;
+	private String senha;
 	@Column(columnDefinition = "TEXT")
 	private String sobre;
 
@@ -52,6 +55,7 @@ public class Abrigo {
 		this.cnpj = dadosEntradaAbrigo.cnpj();
 		this.telefone = dadosEntradaAbrigo.telefone();
 		this.email = dadosEntradaAbrigo.email();
+		this.senha = dadosEntradaAbrigo.senhaRepetida();
 		this.endereco = new Endereco(dadosEntradaAbrigo.endereco());
 		this.sobre = dadosEntradaAbrigo.sobre();
 
@@ -61,16 +65,12 @@ public class Abrigo {
 		if (dadosAtualizacao.imagem() != null) {
 			this.imagem = dadosAtualizacao.imagem();
 		}
-		if (dadosAtualizacao.email() != null) {
-			this.email = dadosAtualizacao.email();
-		}
 		if (dadosAtualizacao.telefone() != null) {
 			this.telefone = dadosAtualizacao.telefone();
 		}
 		if (dadosAtualizacao.endereco() != null) {
 			this.endereco.dadosEnderecoAtualizado(dadosAtualizacao.endereco());
 		}
-
 		if (dadosAtualizacao.sobre() != null) {
 			this.sobre = dadosAtualizacao.sobre();
 		}

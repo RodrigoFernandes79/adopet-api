@@ -3,7 +3,6 @@ package com.adopet.apiadopet.domains.tutor;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import com.adopet.apiadopet.domains.adocao.Adocao;
 import com.adopet.apiadopet.domains.endereco.Endereco;
 
@@ -37,8 +36,9 @@ public class Tutor {
 	private Long id;
 	private String nome;
 	private String imagem;
-	private String email;
 	private String telefone;
+	private String email;
+	private String senha;
 
 	@Embedded
 	private Endereco endereco;
@@ -50,28 +50,25 @@ public class Tutor {
 
 	public Tutor(DadosEntradaTutor dadosEntradaTutor) {
 		this.nome = dadosEntradaTutor.nome();
-		this.imagem = dadosEntradaTutor.imagem();
 		this.email = dadosEntradaTutor.email();
-		this.telefone = dadosEntradaTutor.telefone();
-		this.endereco = new Endereco(dadosEntradaTutor.endereco());
-		this.sobre = dadosEntradaTutor.sobre();
+		this.senha = dadosEntradaTutor.senhaRepetida();
+
 	}
 
 	public void dadosAbrigoAtualizado(DadosAtualizacaoTutor dadosAtualizacaoTutor) {
 		if (dadosAtualizacaoTutor.imagem() != null) {
 			this.imagem = dadosAtualizacaoTutor.imagem();
 		}
-		if (dadosAtualizacaoTutor.email() != null) {
-			this.email = dadosAtualizacaoTutor.email();
-		}
 		if (dadosAtualizacaoTutor.telefone() != null) {
 			this.telefone = dadosAtualizacaoTutor.telefone();
 		}
 		if (dadosAtualizacaoTutor.endereco() != null) {
+			if (this.endereco == null) {
+				this.endereco = new Endereco(dadosAtualizacaoTutor.endereco());
+			}
 			this.endereco.dadosEnderecoAtualizado(dadosAtualizacaoTutor.endereco());
-			;
-		}
 
+		}
 		if (dadosAtualizacaoTutor.sobre() != null) {
 			this.sobre = dadosAtualizacaoTutor.sobre();
 		}
