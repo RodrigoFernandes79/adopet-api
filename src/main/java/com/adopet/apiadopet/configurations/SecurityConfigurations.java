@@ -49,6 +49,7 @@ public class SecurityConfigurations {
 		.hasRole("TUTOR")
 		.requestMatchers(HttpMethod.DELETE,"/adocao/**")
 		.hasRole("ABRIGO")
+		.requestMatchers("/v3/api-docs/**","/swagger-ui/**").permitAll()
 		.anyRequest().authenticated()
 		.and().addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
 		.build();

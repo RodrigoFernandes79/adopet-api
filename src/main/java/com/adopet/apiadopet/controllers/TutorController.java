@@ -27,6 +27,7 @@ import com.adopet.apiadopet.domains.tutor.DadosSaidaCadastroTutor;
 import com.adopet.apiadopet.domains.tutor.DadosSaidaTutor;
 import com.adopet.apiadopet.services.TutorService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 @RestController
@@ -50,6 +51,7 @@ public class TutorController {
 
 	}
 
+	@SecurityRequirement(name = "bearer-key")
 	@GetMapping
 	public ResponseEntity<Page<DadosListagemTutor>> retornarTutores(
 			@PageableDefault(size = 10, sort = { "nome" }) Pageable paginacao) {
@@ -59,6 +61,7 @@ public class TutorController {
 
 	}
 
+	@SecurityRequirement(name = "bearer-key")
 	@GetMapping("/{id}")
 	public ResponseEntity<DadosSaidaCadastroTutor> retornarTutorPorId(@PathVariable Long id) {
 		var tutor = tutorService.retornarTutorPorId(id);
@@ -67,6 +70,7 @@ public class TutorController {
 
 	}
 
+	@SecurityRequirement(name = "bearer-key")
 	@Transactional
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Map<String, String>> deletarTutorPorid(@PathVariable Long id) {
@@ -78,6 +82,7 @@ public class TutorController {
 
 	}
 
+	@SecurityRequirement(name = "bearer-key")
 	@Transactional
 	@PatchMapping("/{id}")
 	public ResponseEntity<DadosSaidaCadastroTutor> alterarTutorPorId(@PathVariable Long id,
@@ -87,20 +92,5 @@ public class TutorController {
 		return ResponseEntity.ok().body(tutorAlterado);
 
 	}
-	// @Transactional
-	// @PostMapping("/cadastro")
-	// public ResponseEntity<DadosSaidaUsuario> cadastrarUsuario(
-	// @RequestBody @Valid DadosCadastroUsuario dadosUsuario,
-	// UriComponentsBuilder uriComponentsBuilder) {
-
-	// var usuario = tutorService.cadastrarUsuario(dadosUsuario);
-
-	// var uri = uriComponentsBuilder
-	// .path("/login/cadastro/{id}").buildAndExpand(usuario.getId())
-	// .toUri();
-
-	// return ResponseEntity.created(uri).body(new
-	// DadosSaidaUsuario(dadosUsuario.nome(), usuario.getEmail()));
-	// }
 
 }

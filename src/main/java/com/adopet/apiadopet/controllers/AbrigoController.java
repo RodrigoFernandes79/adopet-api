@@ -24,6 +24,7 @@ import com.adopet.apiadopet.domains.abrigo.DadosListagemAbrigo;
 import com.adopet.apiadopet.domains.abrigo.DadosSaidaAbrigo;
 import com.adopet.apiadopet.services.AbrigoService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -47,6 +48,7 @@ public class AbrigoController {
 
 	}
 
+	@SecurityRequirement(name = "bearer-key")
 	@GetMapping
 	public ResponseEntity<Page<DadosListagemAbrigo>> listarAbrigo(
 			@PageableDefault(size = 10, sort = { "nome" }) Pageable pageable) {
@@ -55,6 +57,7 @@ public class AbrigoController {
 		return ResponseEntity.ok().body(abrigo);
 	}
 
+	@SecurityRequirement(name = "bearer-key")
 	@GetMapping("/{id}")
 	public ResponseEntity<DadosSaidaAbrigo> listarAbrigoPorId(@PathVariable Long id) {
 		var abrigo = abrigoService.listarAbrigoPorId(id);
@@ -62,6 +65,7 @@ public class AbrigoController {
 		return ResponseEntity.ok().body(abrigo);
 	}
 
+	@SecurityRequirement(name = "bearer-key")
 	@Transactional
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Map<String, String>> deletarAbrigoPorId(@PathVariable Long id) {
@@ -72,6 +76,7 @@ public class AbrigoController {
 
 	}
 
+	@SecurityRequirement(name = "bearer-key")
 	@Transactional
 	@PatchMapping("{id}")
 	public ResponseEntity<DadosSaidaAbrigo> atualizarAbrigoPorId(

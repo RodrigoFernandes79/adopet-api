@@ -16,9 +16,11 @@ import com.adopet.apiadopet.domains.adocao.DadosEntradaAdocao;
 import com.adopet.apiadopet.domains.adocao.DadosSaidaAdocao;
 import com.adopet.apiadopet.services.AdocaoService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
+@SecurityRequirement(name = "bearer-key")
 @RestController
 @RequestMapping("/adocao")
 public class AdocaoController {
