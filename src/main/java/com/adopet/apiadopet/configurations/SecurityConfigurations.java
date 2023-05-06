@@ -16,7 +16,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.adopet.apiadopet.security.JwtAuthFilter;
 
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfigurations {
@@ -28,43 +27,43 @@ public class SecurityConfigurations {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
 		return http.csrf().disable()
-		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-		.and().authorizeRequests()
-		.requestMatchers(HttpMethod.POST,"/login/**").permitAll()
-		.requestMatchers(HttpMethod.GET,"/tutores/**")
-		.hasAnyRole("ABRIGO","TUTOR")
-		.requestMatchers(HttpMethod.POST,"/tutores/**").permitAll()
-		.requestMatchers("/tutores/**")
-		.hasRole("TUTOR")
-		.requestMatchers(HttpMethod.GET,"/pets/**")
-		.hasAnyRole("ABRIGO","TUTOR")
-		.requestMatchers("/pets/**")
-		.hasRole("ABRIGO")
-		.requestMatchers(HttpMethod.GET,"/abrigos/**")
-		.hasAnyRole("ABRIGO","TUTOR")
-		.requestMatchers(HttpMethod.POST,"/abrigos/**").permitAll()
-		.requestMatchers("/abrigos/**")
-		.hasRole("ABRIGO")
-		.requestMatchers(HttpMethod.POST,"/adocao/**")
-		.hasRole("TUTOR")
-		.requestMatchers(HttpMethod.DELETE,"/adocao/**")
-		.hasRole("ABRIGO")
-		.requestMatchers("/v3/api-docs/**","/swagger-ui/**").permitAll()
-		.anyRequest().authenticated()
-		.and().addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-		.build();
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.and().authorizeRequests()
+				.requestMatchers(HttpMethod.POST, "/login/**").permitAll()
+				.requestMatchers(HttpMethod.GET, "/tutores/**")
+				.hasAnyRole("ABRIGO", "TUTOR")
+				.requestMatchers(HttpMethod.POST, "/tutores/**").permitAll()
+				.requestMatchers("/tutores/**")
+				.hasRole("TUTOR")
+				.requestMatchers(HttpMethod.GET, "/pets/**")
+				.hasAnyRole("ABRIGO", "TUTOR")
+				.requestMatchers("/pets/**")
+				.hasRole("ABRIGO")
+				.requestMatchers(HttpMethod.GET, "/abrigos/**")
+				.hasAnyRole("ABRIGO", "TUTOR")
+				.requestMatchers(HttpMethod.POST, "/abrigos/**").permitAll()
+				.requestMatchers("/abrigos/**")
+				.hasRole("ABRIGO")
+				.requestMatchers(HttpMethod.POST, "/adocao/**")
+				.hasRole("TUTOR")
+				.requestMatchers(HttpMethod.DELETE, "/adocao/**")
+				.hasRole("ABRIGO")
+				.requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll()
+				.anyRequest().authenticated()
+				.and().addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+				.build();
 	}
 
 	@Bean
-    public AuthenticationManager authenticationManager(
-            AuthenticationConfiguration configuration) throws Exception {
+	public AuthenticationManager authenticationManager(
+			AuthenticationConfiguration configuration) throws Exception {
 
-        return configuration.getAuthenticationManager();
-    }
+		return configuration.getAuthenticationManager();
+	}
 
-    @Bean  //método para encriptografar senhas
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	@Bean // método para encriptografar senhas
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
 }
