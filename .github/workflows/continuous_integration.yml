@@ -35,7 +35,7 @@ jobs:
         docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/api-adopet:1.0.0
         docker tag  ${{ secrets.DOCKER_USERNAME }}/api-adopet:1.0.0 ${{ secrets.DOCKER_USERNAME }}/api-adopet:${{github.run_id}}
         docker push ${{ secrets.DOCKER_USERNAME }}/api-adopet:${{github.run_id}} 
-        docker push ${{ secrets.DOCKER_USERNAME }}/api-adopet
+        docker push ${{ secrets.DOCKER_USERNAME }}/api-adopet:1.0.0
       
     - name: Docker Compose Build 
       run: docker-compose build
