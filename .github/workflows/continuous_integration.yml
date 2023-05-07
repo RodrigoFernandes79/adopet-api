@@ -32,7 +32,7 @@ jobs:
       run: |
         docker tag ${{ secrets.DOCKER_USERNAME }}/api-adopet:1.0.0 ${{ secrets.DOCKER_USERNAME }}/api-adopet:${{github.run_id}}
         docker push ${{ secrets.DOCKER_USERNAME }}/api-adopet:${{github.run_id}} 
-        docker push ${{ secrets.DOCKER_USERNAME }}/api-adopet:1.0.0
+        docker push ${{ secrets.DOCKER_USERNAME }}/api-adopet
       
     - name: Docker Compose Build 
       run: docker-compose build
