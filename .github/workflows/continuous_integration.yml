@@ -27,11 +27,9 @@ jobs:
         cache: maven
         
     - name: Build Application Jar
-      working-directory: /adopet-api
       run: mvn clean package
       
     - name: Docker Compose Build 
-      working-directory: /adopet-api
       run: docker compose build
       
     - name: Push to Docker Hub Container registry
