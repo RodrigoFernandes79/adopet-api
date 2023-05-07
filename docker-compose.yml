@@ -1,0 +1,49 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1312
+      POSTGRES_DB: adopet
+    ports:
+      - "5433:5433"
+    expose:
+      - "5433"
+    networks:
+      - adopet-network
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+
+    networks:
+      - adopet-network
+
+  adopet-api:
+    image: fernandesrh/api-adopet:1.0.0
+    restart: always
+    ports:
+      - "8080:8080"
+    command: mvn spring-boot:run
+    depends_on:
+      - db
+    networks:
+      - adopet-network
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/adopet
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 1312
+      SPRING_JPA_DATABASE-PLATFORM: org.hibernate.dialect.PostgreSQLDialect
+      SPRING_PROFILES_ACTIVE: dev
+
+networks:
+  adopet-network:
+    driver: bridge
+

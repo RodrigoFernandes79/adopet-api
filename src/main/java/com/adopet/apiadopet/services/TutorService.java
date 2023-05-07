@@ -21,7 +21,7 @@ import com.adopet.apiadopet.security.Usuario;
 import com.adopet.apiadopet.security.UsuarioRepository;
 
 import jakarta.validation.Valid;
-import lombok.var;
+
 
 @Service
 public class TutorService {

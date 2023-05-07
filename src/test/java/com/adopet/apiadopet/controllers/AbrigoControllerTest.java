@@ -26,8 +26,6 @@ import com.adopet.apiadopet.domains.endereco.DadosEntradaEndereco;
 import com.adopet.apiadopet.domains.endereco.Endereco;
 import com.adopet.apiadopet.services.AbrigoService;
 
-import lombok.var;
-
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureJsonTesters

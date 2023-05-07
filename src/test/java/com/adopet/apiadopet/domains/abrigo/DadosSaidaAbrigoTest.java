@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import com.adopet.apiadopet.domains.endereco.DadosEntradaEndereco;
 
-import lombok.var;
-
 public class DadosSaidaAbrigoTest {
 	private final String NOME = "FULANO";
 	private final String IMAGEM = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeyZAyJNYzHM71aZGvTEA36SOpXro_zVGGng&usqp=CAU";
