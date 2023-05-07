@@ -25,7 +25,7 @@ jobs:
         java-version: '17'
         distribution: 'adopt'
         cache: maven
-        javaHome: 'C:\Program Files\Java\jdk-17.0.6'
+        
         
     - name: Build Application Jar
       run: mvn clean package -DskipTests
