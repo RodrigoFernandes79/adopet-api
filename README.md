@@ -12,6 +12,7 @@ Projeto em Java realizado através da Alura no Challenge Backend 6ª Edição. A
 
 ![Badge Java](https://camo.githubusercontent.com/80db829f48ed5c5c3d48d6a3d864ff175b0e6cc6c5a12fcceaf5e14396f2bd6c/68747470733a2f2f696d672e736869656c64732e696f2f7374617469632f76313f6c6162656c3d4a617661266d6573736167653d313726636f6c6f723d6f72616e6765267374796c653d666f722d7468652d6261646765266c6f676f3d6a617661)
 ![Badge Spring](https://camo.githubusercontent.com/0b4c1a53e58ff8a484caf1c09d0832ddf6ad68a419d8d51611ff030f0e4f61bc/68747470733a2f2f696d672e736869656c64732e696f2f7374617469632f76313f6c6162656c3d537072696e67626f6f74266d6573736167653d76332e302e3526636f6c6f723d627269676874677265656e267374796c653d666f722d7468652d6261646765266c6f676f3d737072696e67)
+[![Docker Hub Repo](https://img.shields.io/docker/pulls/fernandesrh/api-adopet.svg)](https://hub.docker.com/repository/docker/fernandesrh/api-adopet)
 ## ✔️Técnicas e tecnologias utilizadas
 - `☕Java 17`
 - `💻Visual Studio Code`
